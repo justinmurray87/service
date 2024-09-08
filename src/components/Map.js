@@ -1,41 +1,66 @@
-// src/components/Map.js
-import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import googleApiConfig from '../config/googleApiConfig';
+import React, { useEffect } from 'react';
 
-const mapContainerStyle = {
-  width: '100%',
-  height: '400px',
-};
+// Sample restaurant data with latitude and longitude
+const restaurants = [
+  { id: 1, name: 'Maison de Lumière', lat: 37.7749, lng: -122.4194 },
+  { id: 2, name: 'The Copper Grove', lat: 37.7849, lng: -122.4094 },
+  { id: 3, name: 'Étoile Blanche', lat: 37.7949, lng: -122.4294 },
+  // Add more restaurants as needed
+];
 
-const Map = ({ selectedCity }) => {
-  const [center, setCenter] = useState({ lat: 37.7749, lng: -122.4194 });
-  const [markers, setMarkers] = useState([]);
-
+const Map = () => {
   useEffect(() => {
-    // Update center based on selectedCity
-    // Hardcoded values for demo purposes
-    if (selectedCity === 'San Francisco') {
-      setCenter({ lat: 37.7749, lng: -122.4194 });
-    }
-    // Add more conditions for other cities
+    const googleMapsApiKey = 'AIzaSyCkCGLUow0ZFgvp7o2MAOjlZZxZoihs4Vo'; // Your API Key
 
-    // Fetch top restaurants and update markers
-    // Hardcoded markers for demo purposes
-    setMarkers([
-      { lat: 37.7749, lng: -122.4194, name: 'Restaurant 1' },
-      { lat: 37.7849, lng: -122.4094, name: 'Restaurant 2' },
-    ]);
-  }, [selectedCity]);
+    // Check if the script is already added to avoid adding multiple scripts
+    if (!document.querySelector(`script[src*="maps.googleapis.com"]`)) {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${googleMapsApiKey}&callback=initMap`;
+      script.async = true;  // Ensures asynchronous loading
+      script.defer = true;  // Defers execution until HTML is fully parsed
+      document.body.appendChild(script);
+    }
+
+    // Define the initMap function to initialize the map
+    window.initMap = function () {
+      const map = new window.google.maps.Map(document.getElementById('map'), {
+        center: { lat: 37.7749, lng: -122.4194 }, // Example center: San Francisco
+        zoom: 12,
+      });
+
+      // Loop through the restaurants and place markers
+      restaurants.forEach((restaurant) => {
+        const marker = new window.google.maps.Marker({
+          position: { lat: restaurant.lat, lng: restaurant.lng },
+          map: map,
+          title: restaurant.name,
+        });
+
+        // Optionally add info windows for each marker
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: `<h3>${restaurant.name}</h3>`,
+        });
+
+        marker.addListener('click', () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    };
+
+    return () => {
+      const existingScript = document.querySelector(`script[src*="maps.googleapis.com"]`);
+      if (existingScript) {
+        document.body.removeChild(existingScript);
+      }
+    };
+  }, []);
 
   return (
-    <LoadScript googleMapsApiKey={googleApiConfig.apiKey}>
-      <GoogleMap mapContainerStyle={mapContainerStyle} center={center} zoom={12}>
-        {markers.map((marker, index) => (
-          <Marker key={index} position={{ lat: marker.lat, lng: marker.lng }} title={marker.name} />
-        ))}
-      </GoogleMap>
-    </LoadScript>
+    <div>
+      <h2>Map</h2>
+      {/* Corrected the style prop */}
+      <div id="map" style={{ width: '100%', height: '400px' }}>This is the Map</div>
+    </div>
   );
 };
 
