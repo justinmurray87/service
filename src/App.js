@@ -56,9 +56,7 @@ const App = () => {
                 </section>
 
                 {isMapVisible && (
-                  <section className="map-section">
                     <Map selectedCity={selectedCity} />
-                  </section>
                 )}
 
                 <section className="top-lists">
