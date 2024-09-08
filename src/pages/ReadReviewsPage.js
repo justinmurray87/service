@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Map from '../components/Map';
 import ReviewList from '../components/ReviewList';
-import { reviews } from '../data/sampleData';
+import data from '../data/sampleData';
 
 const ReadReviewsPage = () => {
   const [filter, setFilter] = useState({
@@ -11,7 +11,7 @@ const ReadReviewsPage = () => {
     search: '',
   });
 
-  const filteredReviews = reviews.filter((review) => {
+  const filteredReviews = data.reviews.filter((review) => {
     const matchesCuisine = filter.cuisine ? review.cuisine === filter.cuisine : true;
     const matchesCategory = filter.category ? review.category === filter.category : true;
     const matchesSearch = filter.search
@@ -22,17 +22,18 @@ const ReadReviewsPage = () => {
   });
 
   const reviewLocations = filteredReviews.map((review) => ({
-    lat: review.location.lat,
-    lng: review.location.lng,
-    title: review.restaurantName,
+    lat: review.location?.lat,
+    lng: review.location?.lng,
+    title: review.restaurantName || "Restaurant",
   }));
+  console.log("LOCATIONS>",reviewLocations)
 
   return (
     <div className="read-reviews-page">
       <h2>Your Reviews</h2>
 
       {/* Interactive map showing review locations */}
-      <Map locations={reviewLocations} />
+      <Map locations={reviewLocations}/>
 
       {/* Filter section */}
       <div className="filter-section">

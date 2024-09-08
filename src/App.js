@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'; // Import these for routing
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Updated for Routes
 import CitySelector from './components/CitySelector';
 import MainMenu from './components/MainMenu';
 import TopRestaurants from './components/TopRestaurants';
@@ -7,8 +7,8 @@ import TopReviewers from './components/TopReviewers';
 import FeaturedReviews from './components/FeaturedReviews';
 import Map from './components/Map';
 import SearchBar from './components/SearchBar';
-import ReadReviewsPage from './pages/ReadReviewsPage'; // Make sure this is correctly imported
-import AddReviewPage from './pages/AddReviewPage'; // Make sure this is correctly imported
+import ReadReviewsPage from './pages/ReadReviewsPage';
+import AddReviewPage from './pages/AddReviewPage';
 
 const defaultCity = 'San Francisco'; // Initial hardcoded city
 
@@ -35,41 +35,43 @@ const App = () => {
 
         {/* Main Content */}
         <main>
-          <Switch> {/* Switch will make sure only one route renders at a time */}
+          <Routes> {/* Updated Switch to Routes */}
             {/* Route for the Read Reviews Page */}
-            <Route path="/reviews" component={ReadReviewsPage} />
+            <Route path="/reviews" element={<ReadReviewsPage />} />
 
             {/* Route for the Add Review Page */}
-            <Route path="/add-review" component={AddReviewPage} />
+            <Route path="/add-review" element={<AddReviewPage />} />
 
             {/* Default Route (Home page) */}
-            <Route path="/" exact>
-              <section className="search-section">
-                <SearchBar selectedCity={selectedCity} />
-              </section>
-
-              <section className="map-toggle">
-                <button onClick={toggleMapVisibility}>
-                  {isMapVisible ? 'Hide Map' : 'Show Map'}
-                </button>
-              </section>
-
-              {isMapVisible && (
-                <section className="map-section">
-                  <Map selectedCity={selectedCity} />
+            <Route path="/" element={
+              <>
+                <section className="search-section">
+                  <SearchBar selectedCity={selectedCity} />
                 </section>
-              )}
 
-              <section className="top-lists">
-                <TopRestaurants selectedCity={selectedCity} />
-                <TopReviewers selectedCity={selectedCity} />
-              </section>
+                <section className="map-toggle">
+                  <button onClick={toggleMapVisibility}>
+                    {isMapVisible ? 'Hide Map' : 'Show Map'}
+                  </button>
+                </section>
 
-              <section className="featured-reviews">
-                <FeaturedReviews selectedCity={selectedCity} />
-              </section>
-            </Route>
-          </Switch>
+                {isMapVisible && (
+                  <section className="map-section">
+                    <Map selectedCity={selectedCity} />
+                  </section>
+                )}
+
+                <section className="top-lists">
+                  <TopRestaurants selectedCity={selectedCity} />
+                  <TopReviewers selectedCity={selectedCity} />
+                </section>
+
+                <section className="featured-reviews">
+                  <FeaturedReviews selectedCity={selectedCity} />
+                </section>
+              </>
+            } exact />
+          </Routes>
         </main>
       </div>
     </Router>
