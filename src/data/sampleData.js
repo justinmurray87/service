@@ -1,21 +1,39 @@
 // src/data/sampleData.js
 const sampleData = {
   restaurants: [
-    { id: 1, name: 'Maison de Lumière', city: 'San Francisco' },
-    { id: 2, name: 'The Copper Grove', city: 'San Francisco' },
-    { id: 3, name: 'Étoile Blanche', city: 'San Francisco' },
-    { id: 4, name: 'Cedar & Stone', city: 'San Francisco' },
-    { id: 5, name: 'La Mer Enchantée', city: 'San Francisco' },
-    { id: 6, name: 'Les Trois Rivières', city: 'New York' },
-    { id: 7, name: 'The Velvet Willow', city: 'New York' },
-    { id: 8, name: 'The Gilded Serpent', city: 'New York' },
-    { id: 9, name: 'Le Jardin Mystique', city: 'New York' },
-    { id: 10, name: 'La Couronne d’Or', city: 'New York' },
-    { id: 11, name: 'Solstice Flame', city: 'Los Angeles' },
-    { id: 12, name: 'The Lunar Orchid', city: 'Los Angeles' },
-    { id: 13, name: 'Celestial Forge', city: 'Los Angeles' },
-    { id: 14, name: 'Oceanic Reverie', city: 'Los Angeles' },
-    { id: 15, name: 'Le Mirage Étoilé', city: 'Los Angeles' }
+    { id: 1, name: 'Maison de Lumière', city: 'San Francisco', lat: 37.7749, lng: -122.4194, lastReviewedDate: '2024-08-15', averageRating: 4.8, category: 'eats', vibe: 'Elegant', bestDish: 'Lobster Bisque' },
+    { id: 2, name: 'The Copper Grove', city: 'San Francisco', lat: 37.7849, lng: -122.4094, lastReviewedDate: '2024-09-01', averageRating: 4.7, category: 'eats', vibe: 'Rustic', bestDish: 'Roast Duck' },
+    { id: 3, name: 'Étoile Blanche', city: 'San Francisco', lat: 37.7949, lng: -122.4294, lastReviewedDate: '2024-07-10', averageRating: 4.9, category: 'eats', vibe: 'Sophisticated', bestDish: 'Foie Gras' },
+    { id: 4, name: 'Cedar & Stone', city: 'San Francisco', lat: 37.7649, lng: -122.4494, lastReviewedDate: '2024-06-08', averageRating: 4.6, category: 'eats', vibe: 'Warm & Cozy', bestDish: 'Grilled Lamb' },
+    { id: 5, name: 'La Mer Enchantée', city: 'San Francisco', lat: 37.7549, lng: -122.4594, lastReviewedDate: '2024-08-22', averageRating: 4.8, category: 'eats', vibe: 'Nautical', bestDish: 'Oysters' },
+    
+    // New York Restaurants
+    { id: 6, name: 'Les Trois Rivières', city: 'New York', lat: 40.7128, lng: -74.0060, lastReviewedDate: '2024-07-19', averageRating: 4.9, category: 'eats', vibe: 'Parisian Chic', bestDish: 'Foie Gras' },
+    { id: 7, name: 'The Velvet Willow', city: 'New York', lat: 40.7228, lng: -74.0160, lastReviewedDate: '2024-05-11', averageRating: 4.6, category: 'eats', vibe: 'Whimsical', bestDish: 'Seared Scallops' },
+    { id: 8, name: 'The Gilded Serpent', city: 'New York', lat: 40.7328, lng: -74.0260, lastReviewedDate: '2024-06-17', averageRating: 4.7, category: 'eats', vibe: 'Opulent', bestDish: 'Venison with Blackberry Reduction' },
+    { id: 9, name: 'Le Jardin Mystique', city: 'New York', lat: 40.7428, lng: -74.0360, lastReviewedDate: '2024-08-03', averageRating: 4.8, category: 'eats', vibe: 'Secret Garden', bestDish: 'Roasted Quail' },
+    { id: 10, name: 'La Couronne d’Or', city: 'New York', lat: 40.7528, lng: -74.0460, lastReviewedDate: '2024-04-23', averageRating: 4.9, category: 'eats', vibe: 'Regal', bestDish: 'Filet Mignon' },
+    
+    // Los Angeles Restaurants
+    { id: 11, name: 'Solstice Flame', city: 'Los Angeles', lat: 34.0522, lng: -118.2437, lastReviewedDate: '2024-07-30', averageRating: 4.8, category: 'eats', vibe: 'Cosmic', bestDish: 'Seared Duck Breast' },
+    { id: 12, name: 'The Lunar Orchid', city: 'Los Angeles', lat: 34.0622, lng: -118.2537, lastReviewedDate: '2024-06-15', averageRating: 4.7, category: 'eats', vibe: 'Botanical', bestDish: 'Braised Short Rib' },
+    { id: 13, name: 'Celestial Forge', city: 'Los Angeles', lat: 34.0722, lng: -118.2637, lastReviewedDate: '2024-08-01', averageRating: 4.8, category: 'eats', vibe: 'Artful', bestDish: 'Grilled Octopus' },
+    { id: 14, name: 'Oceanic Reverie', city: 'Los Angeles', lat: 34.0822, lng: -118.2737, lastReviewedDate: '2024-07-25', averageRating: 4.7, category: 'eats', vibe: 'Coastal', bestDish: 'Grilled Lobster' },
+    { id: 15, name: 'Le Mirage Étoilé', city: 'Los Angeles', lat: 34.0922, lng: -118.2837, lastReviewedDate: '2024-05-10', averageRating: 4.9, category: 'eats', vibe: 'Dreamlike', bestDish: 'Pan-Seared Scallops' },
+    
+    // Chicago Restaurants
+    { id: 16, name: 'Windy City Bistro', city: 'Chicago', lat: 41.8781, lng: -87.6298, lastReviewedDate: '2024-09-01', averageRating: 4.7, category: 'eats', vibe: 'Urban Chic', bestDish: 'Deep Dish Pizza' },
+    { id: 17, name: 'The Blue Plate', city: 'Chicago', lat: 41.8881, lng: -87.6398, lastReviewedDate: '2024-08-05', averageRating: 4.8, category: 'eats', vibe: 'Contemporary', bestDish: 'Grilled Steak' },
+    { id: 18, name: 'Lakefront Elegance', city: 'Chicago', lat: 41.8681, lng: -87.6198, lastReviewedDate: '2024-09-01', averageRating: 4.9, category: 'eats', vibe: 'Scenic', bestDish: 'Lobster Roll' },
+    { id: 19, name: 'Urban Hearth', city: 'Chicago', lat: 41.8581, lng: -87.6298, lastReviewedDate: '2024-07-28', averageRating: 4.6, category: 'eats', vibe: 'Cozy', bestDish: 'Roast Duck' },
+    { id: 20, name: 'The Gilded Fork', city: 'Chicago', lat: 41.8481, lng: -87.6498, lastReviewedDate: '2024-06-18', averageRating: 4.8, category: 'eats', vibe: 'Elegant', bestDish: 'Beef Wellington' },
+    
+    // Miami Restaurants
+    { id: 21, name: 'Sunset Grill', city: 'Miami', lat: 25.7617, lng: -80.1918, lastReviewedDate: '2024-09-01', averageRating: 4.7, category: 'eats', vibe: 'Beachfront', bestDish: 'Grilled Snapper' },
+    { id: 22, name: 'Tropical Breeze', city: 'Miami', lat: 25.7717, lng: -80.2018, lastReviewedDate: '2024-08-23', averageRating: 4.6, category: 'eats', vibe: 'Relaxed', bestDish: 'Shrimp Tacos' },
+    { id: 23, name: 'Palm Oasis', city: 'Miami', lat: 25.7517, lng: -80.1818, lastReviewedDate: '2024-07-14', averageRating: 4.8, category: 'eats', vibe: 'Tropical', bestDish: 'Coconut Shrimp' },
+    { id: 24, name: 'Ocean Wave', city: 'Miami', lat: 25.7417, lng: -80.1718, lastReviewedDate: '2024-06-29', averageRating: 4.9, category: 'eats', vibe: 'Seaside', bestDish: 'Grilled Lobster' },
+    { id: 25, name: 'The Island Pearl', city: 'Miami', lat: 25.7317, lng: -80.1618, lastReviewedDate: '2024-05-20', averageRating: 4.9, category: 'eats', vibe: 'Elegant', bestDish: 'Seared Tuna' }
   ],
   reviewers: [
     { id: 1, name: 'Isabella Dumas', city: 'San Francisco' },
@@ -40,35 +58,63 @@ const sampleData = {
       title: 'A Symphony of Flavors at Maison de Lumière',
       content: 'The light poured in through the grand windows of Maison de Lumière as the golden hues of the setting sun bathed the room in a warm glow. Each course arrived like a well-rehearsed performance, with flavors dancing elegantly on the palate. The delicate balance of textures and tastes—crisp, smooth, sweet, and savory—left me spellbound. The service was impeccable, each server moving with a grace and precision that only enhanced the dining experience.',
       city: 'San Francisco',
-      image: '/path/to/image1.jpg'
+      image: '/assets/image1.png'
     },
     {
       id: 2,
       title: 'Enchanting Evening at The Copper Grove',
       content: 'Nestled among the trees, The Copper Grove offers a dining experience like no other. The ambiance was serene, with soft lighting reflecting off copper accents, creating a sense of rustic luxury. The dishes were a revelation—farm-to-table ingredients prepared with artistry and care. The roast duck was tender, with a richness that paired beautifully with the tartness of cranberry compote. Every bite seemed to evoke the very essence of the earth, grounding me in the moment.',
       city: 'San Francisco',
-      image: '/path/to/image2.jpg'
+      image: '/assets/image2.png'
     },
     {
       id: 3,
       title: 'Elegance Redefined at Étoile Blanche',
       content: 'At Étoile Blanche, dining becomes a journey of pure indulgence. From the moment I entered, I was greeted by an air of sophistication that extended from the décor to the menu. The chef’s tasting menu was a parade of gastronomic delights, each course a new revelation. The lobster bisque was creamy and decadent, with a depth of flavor that lingered long after the last spoonful. Paired with a crisp white wine, the evening was a masterclass in culinary elegance.',
       city: 'San Francisco',
-      image: '/path/to/image3.jpg'
+      image: '/assets/image3.png'
     },
     {
       id: 4,
       title: 'Rustic Charm at Cedar & Stone',
       content: 'Cedar & Stone brings a warmth and comfort rarely found in high-end dining. The wood-fired aromas filled the air as I sat at my table, and the open kitchen allowed for a glimpse into the craftsmanship behind each dish. The grilled lamb, seasoned to perfection, melted in my mouth, accompanied by roasted root vegetables that were earthy and sweet. The service was personal and attentive, with each recommendation tailored to my preferences, creating a memorable experience.',
       city: 'San Francisco',
-      image: '/path/to/image4.jpg'
+      image: '/assets/image3.png'
     },
     {
       id: 5,
       title: 'A Maritime Dream at La Mer Enchantée',
       content: 'As soon as I stepped into La Mer Enchantée, I was transported to the coast of France. The decor was reminiscent of a seaside villa, with nautical touches and a palette of soft blues and whites. The seafood was as fresh as if it had been caught moments before reaching my plate. The oysters, briny and rich, were complemented by a light mignonette that brought out their natural flavors. The entire meal was a delicate balance of the ocean’s finest offerings, served with elegance and precision.',
       city: 'San Francisco',
-      image: '/path/to/image5.jpg'
+      image: '/assets/image4.png'
+    },
+    {
+      id: 5,
+      title: 'A Symphony of Flavors at La Mer Enchantée',
+      content: 'La Mer Enchantée is a seafood lover’s paradise. From the moment we were seated, we were enveloped by the calming atmosphere of coastal charm. The highlight of the evening was the grilled lobster – succulent, tender, and bursting with flavor. The accompanying herb butter added just the right touch of richness without overpowering the freshness of the seafood. The service was impeccable, with each course delivered with care and precision. It’s no wonder La Mer Enchantée has become a favorite spot for those seeking an elegant dining experience.',
+      city: 'San Francisco',
+      image: '/assets/image5.png'
+    },
+    {
+      id: 5,
+      title: 'A Coastal Escape in the Heart of San Francisco',
+      content: 'Dining at La Mer Enchantée feels like a brief escape to a French seaside village. The ambiance is intimate, with soft lighting and a warm, inviting decor that immediately sets the mood. The bouillabaisse was a standout – a delicate, yet hearty stew of the freshest seafood, seasoned to perfection. Every spoonful was a testament to the restaurant’s commitment to quality and authenticity. If you’re looking for an unforgettable dining experience that transports you to the coast of France, this is the place.',
+      city: 'San Francisco',
+      image: '/assets/image6.png'
+    },
+    {
+      id: 5,
+      title: 'Exquisite Seafood with a French Flair',
+      content: 'La Mer Enchantée offers an unforgettable dining experience, especially for seafood enthusiasts. The scallops were perfectly seared, with a golden crust and tender, melt-in-your-mouth center. Paired with a silky cauliflower purée and a citrus beurre blanc, the dish was both light and indulgent. The wine selection was equally impressive, with a variety of French and local options that paired beautifully with the meal. The staff was knowledgeable, attentive, and truly passionate about the menu, which only added to the overall experience.',
+      city: 'San Francisco',
+      image: '/assets/image7.png'
+    },
+    {
+      id: 5,
+      title: 'A Feast of Freshness and Elegance',
+      content: 'At La Mer Enchantée, every dish feels like a work of art. The crab-stuffed sole was a particular standout, served with a delicate saffron sauce that enhanced the natural sweetness of the fish. The atmosphere is serene, with soft waves of classical music playing in the background and the gentle hum of conversation filling the air. It’s rare to find a place that combines such high-quality ingredients with impeccable presentation and service. This is a must-visit for anyone in search of a refined dining experience.',
+      city: 'San Francisco',
+      image: '/assets/image8.png'
     },
     {
       id: 6,

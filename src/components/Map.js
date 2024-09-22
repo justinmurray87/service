@@ -1,15 +1,11 @@
 import React, { useEffect } from 'react';
+import sampleData from '../data/sampleData'; // Import the sample data for restaurants
+import cities from '../data/cities'; // Import cities for center location
 
-// Sample restaurant data with latitude and longitude
-const restaurants = [
-  { id: 1, name: 'Maison de Lumière', lat: 37.7749, lng: -122.4194 },
-  { id: 2, name: 'The Copper Grove', lat: 37.7849, lng: -122.4094 },
-  { id: 3, name: 'Étoile Blanche', lat: 37.7949, lng: -122.4294 },
-];
-
-const Map = () => {
+const Map = ({ selectedCity }) => {
   useEffect(() => {
     const googleMapsApiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
     // Check if the script is already added to avoid adding multiple scripts
     if (!window.google || !window.google.maps) {
       const script = document.createElement('script');
@@ -23,23 +19,38 @@ const Map = () => {
 
     // Define the initMap function to initialize the map
     window.initMap = function () {
+      // Ensure selectedCity is being passed correctly
+      console.log("Selected City on Init Map:", selectedCity);
+
+      // Convert selectedCity and city names to lowercase to avoid case-sensitive mismatches
+      const city = cities.find(
+        (city) => city.name.toLowerCase() === selectedCity.toLowerCase()
+      );
+
+      // Check if the city exists before proceeding
+      if (!city || !city.lat || !city.lng) {
+        console.error("City not found or missing coordinates");
+        return;
+      }
+
+      // Initialize the map centered around the selected city's coordinates
       const map = new window.google.maps.Map(document.getElementById('map'), {
-        center: { lat: 37.7749, lng: -122.4194 }, // Example center: San Francisco
+        center: { lat: city.lat, lng: city.lng },
         zoom: 12,
       });
 
-      // Create an array to store markers so they can be cleaned up later
-      const markers = [];
+      // Filter restaurants by selected city
+      const cityRestaurants = sampleData.restaurants.filter(
+        (restaurant) => restaurant.city.toLowerCase() === selectedCity.toLowerCase()
+      );
 
       // Loop through the restaurants and place markers
-      restaurants.forEach((restaurant) => {
+      cityRestaurants.forEach((restaurant) => {
         const marker = new window.google.maps.Marker({
           position: { lat: restaurant.lat, lng: restaurant.lng },
           map: map,
           title: restaurant.name,
         });
-
-        markers.push(marker); // Save the marker to cleanup later
 
         // Optionally add info windows for each marker
         const infoWindow = new window.google.maps.InfoWindow({
@@ -50,9 +61,6 @@ const Map = () => {
           infoWindow.open(map, marker);
         });
       });
-
-      // Store the map and markers so they can be cleaned up
-      window._mapInstance = { map, markers };
     };
 
     // Cleanup function to remove markers and reset map instance
@@ -64,12 +72,11 @@ const Map = () => {
         delete window._mapInstance;
       }
     };
-  }, []);
+  }, [selectedCity]); // Dependency on selectedCity to update map when city changes
 
   return (
     <div>
-      <h2>Map</h2>
-      <div id="map" style={{ width: '100%', height: '400px' }}>This is the Map</div>
+      <div id="map" style={{ width: '100%', height: '300px' }}>This is the Map</div>
     </div>
   );
 };

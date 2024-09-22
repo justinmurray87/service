@@ -1,11 +1,11 @@
-// src/pages/AddReviewPage.js
+// src/components/AddReview.js
 import React, { useState } from 'react';
 import { generateReviewAI } from '../api/api';
 import SearchBar from '../components/SearchBar';
 import ReviewInputForm from '../components/ReviewInputForm';
-import sampleData from '../data/sampleData'; // Import to update sample data
+import sampleData from '../data/sampleData';
 
-const AddReviewPage = () => {
+const AddReview = () => {
   const [step, setStep] = useState(1);
   const [selectedRestaurant, setSelectedRestaurant] = useState(null);
   const [notes, setNotes] = useState('');
@@ -15,11 +15,10 @@ const AddReviewPage = () => {
   const [tone, setTone] = useState('conversational');
   const [isNewRestaurant, setIsNewRestaurant] = useState(false);
 
-  // Handle restaurant selection or addition
   const handleSelectRestaurant = (restaurant) => {
     setSelectedRestaurant(restaurant);
-    setIsNewRestaurant(restaurant.isNew || false); // Flag if this is a new restaurant
-    setStep(2); // Proceed to next step
+    setIsNewRestaurant(restaurant.isNew || false);
+    setStep(2);
   };
 
   const handleNextStep = async () => {
@@ -34,29 +33,35 @@ const AddReviewPage = () => {
   const handlePublish = () => {
     console.log('Publishing review for:', selectedRestaurant.name, finalReview);
     if (isNewRestaurant) {
-      // Add the new restaurant to the sample data (or handle saving in a real database)
       sampleData.restaurants.push({
         id: sampleData.restaurants.length + 1,
         name: selectedRestaurant.name,
         city: selectedRestaurant.city,
         lat: selectedRestaurant.lat,
         lng: selectedRestaurant.lng,
-        lastReviewedDate: new Date().toISOString().split('T')[0], // Today's date
-        averageRating: 0, // Start with 0, or you can use some other logic
+        lastReviewedDate: new Date().toISOString().split('T')[0],
+        averageRating: 0,
         category: 'eats',
         vibe: 'New',
-        bestDish: 'TBD'
+        bestDish: 'TBD',
       });
       console.log('New restaurant added to data:', selectedRestaurant.name);
     }
+
+    // Add sharing options here (Instagram, Twitter, etc.)
+    console.log('Sharing review to social media...');
+  };
+
+  const handleSave = () => {
+    console.log('Review saved for later:', finalReview);
+    // Logic to save the review (could be to local storage, database, etc.)
   };
 
   return (
-    <div className="add-review-page">
+    <div className="add-review-component">
       {step === 1 && (
         <div className="step-1">
           <h2>Select a Restaurant</h2>
-          {/* Reuse SearchBar and pass the callback to handle restaurant selection */}
           <SearchBar onSelectRestaurant={handleSelectRestaurant} />
         </div>
       )}
@@ -81,10 +86,12 @@ const AddReviewPage = () => {
             onChange={(e) => setFinalReview(e.target.value)}
           />
           <button onClick={handlePublish}>Publish Review</button>
+          <button onClick={handleSave}>Save for Later</button>
         </div>
       )}
     </div>
   );
 };
 
-export default AddReviewPage;
+export default AddReview;
+

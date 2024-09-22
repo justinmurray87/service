@@ -1,53 +1,47 @@
+// App.js
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Updated for Routes
-import CitySelector from './components/CitySelector';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainMenu from './components/MainMenu';
+import Map from './components/Map';
+import ReadReviewsPage from './pages/ReadReviewsPage';
+import AddReviewPage from './pages/AddReviewPage';
 import TopRestaurants from './components/TopRestaurants';
 import TopReviewers from './components/TopReviewers';
 import FeaturedReviews from './components/FeaturedReviews';
-import Map from './components/Map';
-import SearchBar from './components/SearchBar';
-import ReadReviewsPage from './pages/ReadReviewsPage';
-import AddReviewPage from './pages/AddReviewPage';
+import Studio from './pages/Studio';
+import data from './data/sampleData';
 
 const defaultCity = 'San Francisco'; // Initial hardcoded city
 
 const App = () => {
   const [selectedCity, setSelectedCity] = useState(defaultCity);
-  const [isMapVisible, setIsMapVisible] = useState(false); // State for toggling map visibility
+  const [isMapVisible, setIsMapVisible] = useState(true); // State for toggling map visibility
 
   // Toggle function to show/hide the map
   const toggleMapVisibility = () => {
     setIsMapVisible(!isMapVisible);
   };
 
+  // Filter reviews based on the selected city
+  const filteredReviews = data.reviews.filter((review) => review.city === selectedCity);
+
   return (
-    <Router> {/* This is the Router wrapping the entire app */}
+    <Router>
       <div className="app">
-        <header className="main-header">
-          <h1>Restaurant & Coffee Shop Reviews</h1>
-          <MainMenu /> {/* Links for navigating */}
-        </header>
+        {/* MainMenu handles the header, search, and city selector */}
+        <MainMenu selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
 
-        <nav className="city-selector">
-          <CitySelector selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
-        </nav>
-
-        {/* Main Content */}
         <main>
-          <Routes> {/* Updated Switch to Routes */}
-            {/* Route for the Read Reviews Page */}
+          <Routes>
             <Route path="/reviews" element={<ReadReviewsPage />} />
-
-            {/* Route for the Add Review Page */}
-            <Route path="/add-review" element={<AddReviewPage />} />
-
-            {/* Default Route (Home page) */}
+            <Route path="/studio" element={<Studio />} />
             <Route path="/" element={
               <>
-                <section className="search-section">
-                  <SearchBar selectedCity={selectedCity} />
-                </section>
+                {isMapVisible && (
+                  <section className="map-section">
+                    <Map selectedCity={selectedCity} />
+                  </section>
+                )}
 
                 <section className="map-toggle">
                   <button onClick={toggleMapVisibility}>
@@ -55,17 +49,13 @@ const App = () => {
                   </button>
                 </section>
 
-                {isMapVisible && (
-                    <Map selectedCity={selectedCity} />
-                )}
-
                 <section className="top-lists">
                   <TopRestaurants selectedCity={selectedCity} />
                   <TopReviewers selectedCity={selectedCity} />
                 </section>
 
                 <section className="featured-reviews">
-                  <FeaturedReviews selectedCity={selectedCity} />
+                  <FeaturedReviews reviews={filteredReviews} />
                 </section>
               </>
             } exact />

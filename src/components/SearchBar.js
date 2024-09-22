@@ -3,7 +3,7 @@ import axios from 'axios';
 import googleApiConfig from '../config/googleApiConfig';
 import sampleData from '../data/sampleData';
 
-const SearchBar = ({ selectedCity }) => {
+const SearchBar = ({ onSelectRestaurant }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
 
@@ -12,7 +12,7 @@ const SearchBar = ({ selectedCity }) => {
       // Search in local data
       let filteredResults = sampleData.restaurants.filter(
         (restaurant) =>
-          restaurant.city === selectedCity && restaurant.name.toLowerCase().includes(query.toLowerCase())
+          restaurant.name.toLowerCase().includes(query.toLowerCase())
       );
 
       // If less than 10 results, query Google Places API
@@ -21,16 +21,19 @@ const SearchBar = ({ selectedCity }) => {
           `https://maps.googleapis.com/maps/api/place/textsearch/json`,
           {
             params: {
-              query: `${query} in ${selectedCity}`,
+              query: query,
               key: googleApiConfig.apiKey,
             },
           }
         );
 
-        // Combine the results and add (not yet reviewed) note for Google results
+        // Combine the results and mark Google results as new
         filteredResults = [...filteredResults, ...googleResults.data.results.map(place => ({
           name: place.name,
-          city: selectedCity,
+          city: 'Unknown', // Since we don't know this until user adds it
+          lat: place.geometry.location.lat,
+          lng: place.geometry.location.lng,
+          isNew: true, // Mark this as a new restaurant
           note: '(not yet reviewed)',
         }))];
       }
@@ -39,6 +42,10 @@ const SearchBar = ({ selectedCity }) => {
     } catch (error) {
       console.error('Error during search', error);
     }
+  };
+
+  const handleSelect = (restaurant) => {
+    onSelectRestaurant(restaurant); // Call parent function to select the restaurant
   };
 
   return (
@@ -52,7 +59,7 @@ const SearchBar = ({ selectedCity }) => {
       <button onClick={handleSearch}>Search</button>
       <ul>
         {results.map((result, index) => (
-          <li key={index}>
+          <li key={index} onClick={() => handleSelect(result)}>
             {result.name} {result.note && <span>{result.note}</span>}
           </li>
         ))}

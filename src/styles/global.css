@@ -1,9 +1,8 @@
-/* src/styles/global.css */
-
+/* Global Styles */
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Lora', serif; /* Lora is a serif font similar to the one used on Cookie and Kate */
+  font-family: 'Lora', serif;
   color: #333;
   background-color: #fff;
   line-height: 1.6;
@@ -21,158 +20,128 @@ h1 {
   font-weight: 700;
 }
 
-h2 {
-  font-size: 2em;
-  margin-top: 40px;
-}
-
-h3 {
-  font-size: 1.5em;
-}
-
 p {
   margin: 0 0 20px;
-  font-family: 'Open Sans', sans-serif; /* Use a clean, sans-serif font for body text */
+  font-family: 'Open Sans', sans-serif;
 }
 
-a {
-  color: #e67300;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
+/* Header Layout */
 .main-header {
-  text-align: center;
-  padding: 40px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
   background-color: #fafafa;
   border-bottom: 1px solid #e5e5e5;
 }
 
-.main-header h1 {
-  font-size: 3em;
+.site-name {
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
 }
 
-.main-header nav {
-  margin-top: 20px;
-}
-
-.main-header nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.header-right {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 20px;
 }
 
-.main-header nav ul li {
-  margin: 0 15px;
-}
-
-.main-header nav ul li a {
-  font-size: 1.2em;
-  font-weight: 600;
-  color: #e67300;
-}
-
-.city-selector {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.city-selector select {
-  padding: 10px;
-  font-size: 1.2em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  margin-top: 10px;
-}
-
-.search-section {
-  text-align: center;
-  margin: 40px 0;
-}
-
+/* Search Bar */
 .search-section input {
-  padding: 10px;
-  width: 70%;
-  max-width: 400px;
-  font-size: 1.2em;
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
 }
 
-.search-section button {
-  padding: 10px 20px;
-  font-size: 1.2em;
-  background-color: #e67300;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+/* City Selector */
+.city-selector select {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Hamburger Menu */
+.hamburger-menu {
   cursor: pointer;
-  margin-left: 10px;
+  display: none; /* Hidden by default, shown on mobile */
 }
 
-.search-section button:hover {
-  background-color: #d95e00;
+.menu-icon {
+  width: 30px;
+  height: 20px;
+  position: relative;
 }
+
+.menu-icon span {
+  background: #333;
+  display: block;
+  height: 4px;
+  margin-bottom: 4px;
+  width: 100%;
+  transition: 0.3s;
+}
+
+.menu-icon.open span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.open span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Navigation Menu */
+.menu-links {
+  display: flex;
+  gap: 20px;
+}
+
+.menu-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.menu-links ul li {
+  margin: 0;
+}
+
+.menu-links ul li a {
+  font-size: 1.1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.menu-links ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Top Lists */
 
 .top-lists {
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap between the lists as needed */
 }
 
-.top-lists > div {
-  width: 48%;
-  margin-bottom: 40px;
+.top-lists > * {
+  flex: 1 1 45%; /* Adjust the width as needed */
 }
 
-.top-lists h2 {
-  font-size: 1.8em;
-  color: #333;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #e67300;
-  padding-bottom: 10px;
-}
-
-.top-lists ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.top-lists ul li {
-  margin: 10px 0;
-  font-size: 1.2em;
-  color: #555;
-}
-
-.top-lists ul li::before {
-  content: "•";
-  color: #e67300;
-  font-size: 1.5em;
-  padding-right: 10px;
-}
-
+/* Featured Reviews */
 .featured-reviews {
   margin: 60px 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  gap: 30px;
 }
 
 .featured-reviews .review-item {
@@ -200,16 +169,77 @@ a:hover {
   color: #666;
 }
 
-.map-section {
-  display: none; /* Hidden by default */
-  margin: 40px 0;
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
-#map {
+/* Card Styles */
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.card img {
   width: 100%;
-  height: 400px; /* Ensure this is set */
+  height: 200px;
+  object-fit: cover;
+  display: block;
 }
 
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-content {
+  padding: 20px;
+}
+
+.card h3 {
+  font-size: 1.75rem;
+  color: #111;
+  margin-bottom: 15px;
+}
+
+.card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.card a {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #e63946;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Button Styles */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #e63946;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #d62828;
+}
+
+/* Footer */
 .footer {
   background-color: #333;
   color: #fff;
@@ -222,17 +252,34 @@ a:hover {
   font-size: 0.9em;
 }
 
-/* Mobile-first responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .top-lists > div {
-    width: 100%;
+  .hamburger-menu {
+    display: block;
   }
 
-  .main-header nav ul {
+  .menu-links {
+    display: none;
     flex-direction: column;
+    position: absolute;
+    right: 20px;
+    top: 70px;
+    background-color: #fafafa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 5px;
   }
 
-  .main-header nav ul li {
-    margin-bottom: 10px;
+  .menu-links.active {
+    display: flex;
+  }
+
+  .top-lists {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .top-lists > * {
+    flex: 1 1 100%;
   }
 }
